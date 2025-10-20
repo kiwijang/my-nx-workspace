@@ -1,0 +1,31 @@
+<div class="table">
+  <div class="thead">
+    <ng-container [ngTemplateOutlet]="headerMd"></ng-container>
+  </div>
+  <div class="tbody">
+    @for (item of data; track $index) {
+    <div class="row">
+      @for (h of header; track $index) {
+      <div class="cell">{{ item[h] }}</div>
+      }
+    </div>
+    }
+  </div>
+</div>
+
+<br />
+<div class="table-md">
+  @for (item of data; track $index) { @for (entry of item | keyvalue; track
+  $index) {
+  <div class="row-md">
+    <div>{{ entry.key }}</div>
+    <div>{{ entry.value }}</div>
+  </div>
+  } }
+</div>
+
+<ng-template #headerMd>
+  @for (h of header; track $index) {
+  <div class="cell">{{ h }}</div>
+  }
+</ng-template>

@@ -1,0 +1,40 @@
+:host {
+  padding-bottom: 500px;
+}
+
+.container {
+  display: flex;
+  min-width: 370px;
+  overflow: auto;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  &__left {
+  }
+  &__right {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+}
+
+.div1 {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  margin: 10px;
+  position: relative;
+}
+.div1:hover > .div2 {
+  visibility: visible;
+}
+
+.div2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  width: 100px;
+  height: 100px;
+  background-color: lightgray;
+}

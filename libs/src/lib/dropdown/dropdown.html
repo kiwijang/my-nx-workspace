@@ -1,0 +1,32 @@
+<input [type]="inputType" #button value="開啟選單" />
+<div #menu class="memu hidden">
+  <div class="dp-container">
+    <input
+      class="dp-filter"
+      #optionFilter
+      type="text"
+      [(ngModel)]="optionFilterValue"
+      placeholder="search"
+    />
+
+
+    <ng-container
+      *ngTemplateOutlet="customTemplate || defaultTemplate; context: { items: items, onItemClick: onItemClick.bind(this), selected: selected }"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #defaultTemplate let-items="items" let-onItemClick="onItemClick" let-selected="selected">
+  <ng-container *ngFor="let item of items">
+    <label class="dp-item">
+      <input
+        type="checkbox"
+        class="checkbox"
+        [checked]="isSelected(item)"
+        (click)="onItemClick($event, item)"
+        [value]="item.value"
+      />
+      <span>{{item.name}}</span>
+    </label>
+  </ng-container>
+</ng-template>

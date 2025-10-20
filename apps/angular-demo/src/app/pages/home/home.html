@@ -1,0 +1,67 @@
+
+<lib-table
+  [header]="['name','desc']"
+  [data]="[{name: 'ccc', 'desc': 'xxxx'},{name: 'aaa', 'desc': 'gg'}]"
+></lib-table>
+
+<ng-container *ngTemplateOutlet="tooltip"></ng-container>
+
+
+<div class="div1">
+  <button>xxxxxx</button>
+
+  <div class="div2">yyyyyy</div>
+</div>
+
+<lib-dropdown [(selected)]="selectedItems"></lib-dropdown>
+
+{{selectedItems | json}}
+{{selectedItems2 | json}}
+
+
+<lib-dropdown [(selected)]="selectedItems2" [customTemplate]="customTemplate" [items]="[{ id: '1', name: '選項一', value: 'option1', description: '這是選項一的描述' }, { id: '2', name: '選項二', value: 'option2', description: '這是選項二的描述' }, { id: '3', name: '選項三', value: 'option3', description: '這是選項三的描述' }]"></lib-dropdown>
+
+<ng-template #customTemplate let-items="items" let-onItemClick="onItemClick" let-selected="selected">
+  {{selected | json}}
+  <div *ngFor="let item of items">
+    <label>
+      <input
+        type="checkbox"
+        class="checkbox"
+        (click)="onItemClick($event, item)"
+        [checked]="isSelected(item)"
+        [value]="item.value"
+      />
+      <span>{{item.name + ' - ' + item.description}}</span>
+    </label>
+  </div>
+</ng-template>
+
+
+<ng-template #tooltip>
+  <div class="container">
+    <div class="container__left"></div>
+    <div class="container__right">
+      <div
+        *ngFor="let item of [{name: 'ccc', 'desc': 'xxxx'},{name: 'aaa', 'desc': 'gg'}]; let i = index"
+      >
+        <button
+          [libTooltip]="dynamicTooltip"
+          [tooltipContext]="{ item: item, index: i }"
+        >
+          {{ item.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #dynamicTooltip let-item="item" let-index="index">
+  <div class="dynamic-tooltip">
+    <p>{{ item.name }}</p>
+    <p>索引: {{ index }}</p>
+    <p>描述: {{ item.description }}</p>
+    <button (click)="editItem(item)">編輯</button>
+    <button (click)="deleteItem(item)">刪除</button>
+  </div>
+</ng-template>

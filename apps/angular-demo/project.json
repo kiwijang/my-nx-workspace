@@ -20,7 +20,7 @@
             "input": "apps/angular-demo/public"
           }
         ],
-        "styles": ["apps/angular-demo/src/styles.css"]
+        "styles": ["apps/angular-demo/src/styles.scss"]
       },
       "configurations": {
         "production": {
