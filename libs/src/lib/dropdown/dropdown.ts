@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, HostListener, inject, ViewChild, AfterViewInit, ElementRef, Input, ContentChild, TemplateRef, ChangeDetectorRef, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, ViewChild, AfterViewInit, ElementRef, Input, ContentChild, TemplateRef, ChangeDetectorRef, ChangeDetectionStrategy, Output, EventEmitter, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, fromEvent } from 'rxjs';
 import { cloneDeep } from 'lodash-es';
 import { FormsModule } from '@angular/forms';
+import { Option } from '../models';
 
 type InputType = 'button' | 'text' | 'checkbox' | 'radio' | 'hidden' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url';
-type Option = { id: string; name: string; value: string };
 
 @Component({
   selector: 'lib-dropdown',
@@ -16,19 +16,19 @@ type Option = { id: string; name: string; value: string };
   styleUrl: './dropdown.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dropdown implements AfterViewInit {
+export class Dropdown implements AfterViewInit, OnInit {
   @ViewChild('button', { static: true }) button!: ElementRef<HTMLElement>;
   @ViewChild('menu', { static: true }) menu!: ElementRef<HTMLElement>;
   @ViewChild('optionFilter', { static: true }) optionFilter!: ElementRef<HTMLInputElement>;
-  @ContentChild(TemplateRef) defaultTemplate!: TemplateRef<any>;
-  @Input() customTemplate?: TemplateRef<any>;
+  @ContentChild(TemplateRef) defaultTemplate!: TemplateRef<HTMLElement>;
+  @Input() customTemplate?: TemplateRef<HTMLElement>;
   @Input() inputType: InputType = 'button';
-  @Input() items: Option[] | any = [{ id: '1', name: '選項一', value: 'option1' }, { id: '2', name: '選項二', value: 'option2' }, { id: '3', name: '選項三', value: 'option3' }];
+  @Input() items: Option[] = [{ id: '1', name: '選項一', value: 'option1' }, { id: '2', name: '選項二', value: 'option2' }, { id: '3', name: '選項三', value: 'option3' }];
 
-  @Input() selected: any[] = [];
-  @Output() selectedChange = new EventEmitter<any[]>();
+  @Input() selected: Option[] = [];
+  @Output() selectedChange = new EventEmitter<Option[]>();
 
-  items_origin: Option[] | any = [];
+  items_origin: Option[] = [];
   isOpen = false;
   private _optionFilterValue = '';
   set optionFilterValue(value: string) {
@@ -65,13 +65,13 @@ export class Dropdown implements AfterViewInit {
       return;
     }
     console.log('Filter input changed');
-    this.items = this.items_origin.filter((item: any) => {
+    this.items = this.items_origin.filter((item: Option) => {
       console.log('Checking item:', item.name, this.optionFilterValue);
       return item.name.includes(this.optionFilterValue);
     });
   }
 
-  onItemClick(event: Event, item: any) {
+  onItemClick(event: Event, item: Option) {
     event.stopPropagation();
     console.log('Item clicked:', item);
     // this.closeDropdown();

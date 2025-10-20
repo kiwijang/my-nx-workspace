@@ -9,9 +9,9 @@ export class Tooltip implements OnInit, OnDestroy {
   private elementRef: ElementRef<HTMLElement> = inject(ElementRef);
   private tippyInstance?: Instance;
   private viewContainerRef = inject(ViewContainerRef);
-  private embeddedViewRef?: EmbeddedViewRef<any>;
-  @Input() libTooltip?: TemplateRef<any>;
-  @Input() tooltipContext?: any; // 傳遞給模板的 context
+  private embeddedViewRef?: EmbeddedViewRef<HTMLElement>;
+  @Input() libTooltip?: TemplateRef<HTMLElement>;
+  @Input() tooltipContext?: { [key: string]: any }; // 傳遞給模板的 context
 
   @Input() placement?: Placement;
 

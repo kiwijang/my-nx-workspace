@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './table.scss',
 })
 export class Table {
-  @Input() header: any[] = [];
+  @Input() header: string[] = [];
   @Input() data: any[] = [];
 }
