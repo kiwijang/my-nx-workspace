@@ -36,6 +36,7 @@ export default [...baseConfig, {
         style: 'kebab-case',
       },
     ],
+    "@typescript-eslint/no-explicit-any": "off",
   },
 }, {
   files: ['**/*.html'],
