@@ -1,6 +1,3 @@
-@use 'scss/_checkbox.scss';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// @use 'scss/_checkbox.scss';
+@use '@my-lib/scss' as *;
 /* You can add global styles to this file, and also import other style files */

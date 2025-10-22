@@ -1,0 +1,9 @@
+@if (item) {
+<input
+  type="checkbox"
+  class="my-lib-checkbox"
+  [checked]="isSelected"
+  (click)="onItemClick($event, item)"
+  [value]="item.value"
+/>
+}

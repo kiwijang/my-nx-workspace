@@ -1,0 +1,164 @@
+:root {
+  color-scheme: light;
+  --color-base-100: oklch(98.8% 0.0069 304.24);
+  --color-base-200: oklch(96.95% 0.0114 308.33);
+  --color-base-300: oklch(40.47% 0.0142 308.07);
+  --color-base-content: oklch(32.61% 0.0705 305.29);
+  --color-primary: oklch(62.68% 0.2325 303.9);
+  --color-primary-content: oklch(97.68% 0.0142 308.3);
+  --color-secondary: oklch(55.79% 0.0221 301.91);
+  --color-secondary-content: oklch(97.64% 0.0013 286.38);
+  --color-accent: oklch(62.31% 0.188 259.81);
+  --color-accent-content: oklch(97.05% 0.0142 254.6);
+  --color-neutral: oklch(32.61% 0.0705 305.29);
+  --color-neutral-content: oklch(99.54% 0.0028 308.43);
+  --color-info: oklch(71.48% 0.1257 215.22);
+  --color-info-content: oklch(98.41% 0.0189 200.87);
+  --color-success: oklch(69.59% 0.1491 162.48);
+  --color-success-content: oklch(97.93% 0.0207 166.11);
+  --color-warning: oklch(70.49% 0.1867 47.6);
+  --color-warning-content: oklch(97.96% 0.0158 73.68);
+  --color-error: oklch(65.39% 0.2221 25.86);
+  --color-error-content: oklch(98.76% 0.0085 67.73);
+  --radius-selector: 0.2rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+.my-lib {
+  &-checkbox {
+    @apply relative shrink-0 cursor-pointer appearance-none p-1 align-middle;
+    margin-right: 4px;
+    color: var(--color-base-100);
+    border-radius: var(--radius-selector);
+    border: var(--border) solid
+      color-mix(in oklab, var(--color-base-content) 40%, #0000);
+    --input-color: var(--color-neutral);
+    box-shadow: 0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset,
+      0 0 #0000 inset, 0 0 #0000;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    --size: calc(var(--size-selector, 0.25rem) * 6);
+    width: var(--size);
+    height: var(--size);
+    background-size: auto, calc(var(--noise) * 100%);
+    background-image: none, var(--fx-noise);
+    &:before {
+      --tw-content: '';
+      content: var(--tw-content);
+      @apply block size-full rotate-45 bg-current opacity-0;
+      transition: clip-path 0.3s, opacity 0.1s, rotate 0.3s, translate 0.3s;
+      transition-delay: 0.1s;
+      clip-path: polygon(
+        20% 100%,
+        20% 80%,
+        50% 80%,
+        50% 80%,
+        70% 80%,
+        70% 100%
+      );
+      box-shadow: 0px 3px 0 0px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset;
+      font-size: 1rem;
+      line-height: 0.75;
+    }
+
+    &:focus-visible {
+      outline: 2px solid
+        color-mix(in oklab, var(--input-color, var(--color-neutral)) 30%, #0000);
+      outline-offset: 0px;
+    }
+
+    &:checked,
+    &[aria-checked='true'] {
+      background-color: var(--input-color, #0000);
+      border-color: var(--input-color, #0000);
+      box-shadow: 0 0 #0000 inset,
+        0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset,
+        0 1px 2px 0 color-mix(in oklab, var(--color-base-300) 20%, #0000);
+
+      &:before {
+        clip-path: polygon(
+          20% 100%,
+          20% 80%,
+          50% 80%,
+          50% 0%,
+          70% 0%,
+          70% 100%
+        );
+        @apply opacity-100;
+      }
+      @media (forced-colors: active) {
+        &:before {
+          @apply rotate-0 bg-transparent [--tw-content:"✔︎"] [clip-path:none];
+        }
+      }
+      @media print {
+        &:before {
+          @apply rotate-0 bg-transparent;
+          --tw-content: '✔︎';
+          clip-path: none;
+        }
+      }
+    }
+
+    &:indeterminate {
+      background-color: var(--color-neutral);
+      &:before {
+        @apply rotate-0 opacity-100;
+        translate: 0 -35%;
+        clip-path: polygon(
+          20% 100%,
+          20% 80%,
+          50% 80%,
+          50% 80%,
+          80% 80%,
+          80% 100%
+        );
+      }
+    }
+  }
+
+  /* Color */
+  //&-checkbox-primary {
+  //   @apply text-primary-content;
+  //   --input-color: var(--color-primary);
+  // }
+
+  //&-checkbox-secondary {
+  //   @apply text-secondary-content;
+  //   --input-color: var(--color-secondary);
+  // }
+
+  //&-checkbox-accent {
+  //   @apply text-accent-content;
+  //   --input-color: var(--color-accent);
+  // }
+
+  //&-checkbox-info {
+  //   @apply text-info-content;
+  //   --input-color: var(--color-info);
+  // }
+
+  //&-checkbox-success {
+  //   @apply text-success-content;
+  //   --input-color: var(--color-success);
+  // }
+
+  //&-checkbox-warning {
+  //   @apply text-warning-content;
+  //   --input-color: var(--color-warning);
+  // }
+
+  //&-checkbox-error {
+  //   @apply text-error-content;
+  //   --input-color: var(--color-error);
+  // }
+
+  &-checkbox:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}

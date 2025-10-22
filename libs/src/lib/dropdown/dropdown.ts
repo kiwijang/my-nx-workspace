@@ -5,12 +5,13 @@ import { filter, fromEvent } from 'rxjs';
 import { cloneDeep } from 'lodash-es';
 import { FormsModule } from '@angular/forms';
 import { Option } from '../models';
+import { Checkbox } from '../checkbox/checkbox';
 
 type InputType = 'button' | 'text' | 'checkbox' | 'radio' | 'hidden' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url';
 
 @Component({
   selector: 'lib-dropdown',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Checkbox],
   standalone: true,
   templateUrl: './dropdown.html',
   styleUrl: './dropdown.scss',

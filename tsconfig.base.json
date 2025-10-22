@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@angular-demo/libs": ["libs/src/index.ts"]
+      "@my-lib/libs": ["libs/src/index.ts"],
+      "@my-lib/scss": ["libs/src/lib/scss/shared.scss"]
     }
   },
   "exclude": ["node_modules", "tmp"]

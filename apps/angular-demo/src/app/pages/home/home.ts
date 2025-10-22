@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Table, Tooltip, Dropdown, Option } from '@angular-demo/libs';
+import { Table, Tooltip, Dropdown, Option } from '@my-lib/libs';
 
 @Component({
   selector: 'app-home',

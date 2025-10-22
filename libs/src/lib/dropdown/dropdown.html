@@ -1,14 +1,13 @@
 <input [type]="inputType" #button value="開啟選單" />
-<div #menu class="memu hidden">
-  <div class="dp-container">
+<div #menu class="my-lib-memu hidden">
+  <div class="my-lib-dp-container">
     <input
-      class="dp-filter"
+      class="my-lib-dp-filter"
       #optionFilter
       type="text"
       [(ngModel)]="optionFilterValue"
       placeholder="search"
     />
-
 
     <ng-container
       *ngTemplateOutlet="customTemplate || defaultTemplate; context: { items: items, onItemClick: onItemClick.bind(this), selected: selected }"
@@ -16,16 +15,26 @@
   </div>
 </div>
 
-<ng-template #defaultTemplate let-items="items" let-onItemClick="onItemClick" let-selected="selected">
+<ng-template
+  #defaultTemplate
+  let-items="items"
+  let-onItemClick="onItemClick"
+  let-selected="selected"
+>
   <ng-container *ngFor="let item of items">
-    <label class="dp-item">
+    <label class="my-lib-dp-item">
       <input
         type="checkbox"
-        class="checkbox"
+        class="my-lib-checkbox"
         [checked]="isSelected(item)"
         (click)="onItemClick($event, item)"
         [value]="item.value"
       />
+      <lib-checkbox
+        [item]="item"
+        [isSelected]="isSelected(item)"
+        (ItemClick)="onItemClick($event.event, $event.item)"
+      ></lib-checkbox>
       <span>{{item.name}}</span>
     </label>
   </ng-container>
