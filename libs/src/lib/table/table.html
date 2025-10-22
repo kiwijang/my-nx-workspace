@@ -1,12 +1,12 @@
-<div class="table">
-  <div class="thead">
+<div class="my-lib-table">
+  <div class="my-lib-thead">
     <ng-container [ngTemplateOutlet]="headerMd"></ng-container>
   </div>
-  <div class="tbody">
+  <div class="my-lib-tbody">
     @for (item of data; track $index) {
-    <div class="row">
+    <div class="my-lib-row">
       @for (h of header; track $index) {
-      <div class="cell">{{ item[h] }}</div>
+      <div class="my-lib-cell">{{ item[h] }}</div>
       }
     </div>
     }
@@ -14,10 +14,10 @@
 </div>
 
 <br />
-<div class="table-md">
+<div class="my-lib-table-md">
   @for (item of data; track $index) { @for (entry of item | keyvalue; track
   $index) {
-  <div class="row-md">
+  <div class="my-lib-row-md">
     <div>{{ entry.key }}</div>
     <div>{{ entry.value }}</div>
   </div>
@@ -26,6 +26,6 @@
 
 <ng-template #headerMd>
   @for (h of header; track $index) {
-  <div class="cell">{{ h }}</div>
+  <div class="my-lib-cell">{{ h }}</div>
   }
 </ng-template>
